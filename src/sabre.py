@@ -457,13 +457,24 @@ class SessionInfo:
     def get_buffer_contents(self):
         global buffer_contents
         return buffer_contents[:]
+    
+    def get_buffer_level(self):
+        global manifest
+        global buffer_contents
+        global buffer_fcc
+
+        return manifest.segment_time * len(buffer_contents) - buffer_fcc
 
 session_info = SessionInfo()
 
 class Abr:
 
     session = session_info
+    network = None
 
+    def set_network(self, network):
+        self.network = network
+   
     def __init__(self, config):
         pass
     def get_quality_delay(self, segment_index):
@@ -1349,6 +1360,9 @@ if __name__ == '__main__':
         abr = abr_list[args.abr](config)
     network = NetworkModel(network_trace)
 
+    # pass network to ABR 
+    abr.abr.set_network(network)
+    
     if args.replace[-3:] == '.py':
         replacer = ReplacementInput(args.replace)
     if args.replace == 'left':
