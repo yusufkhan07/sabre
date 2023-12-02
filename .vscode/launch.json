@@ -13,7 +13,7 @@
             "justMyCode": true,
             "args": [
                 "--abr",
-                "${workspaceFolder}/sabre/example/ComycoLin.py"
+                "${workspaceFolder}/sabre/example/ComycoLin/ComycoLin.py"
             ],
             "cwd": "${workspaceFolder}/sabre/example"
         },

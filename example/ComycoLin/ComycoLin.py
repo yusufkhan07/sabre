@@ -6,19 +6,17 @@ import numpy as np
 import tensorflow.compat.v1 as tf
 print("TensorFlow version:", tf.__version__)
 
-import sys
-sys.path.append('/Users/yusufkhan/git/comp691/comyco-lin/')
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 import il as network
 
-NN_MODEL = '/Users/yusufkhan/git/comp691/comyco-lin/pretrained/model'
+NN_MODEL = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'model/model')
 
 S_INFO = 6  # bit_rate, buffer_size, next_chunk_size, bandwidth_measurement(throughput and time), chunk_til_video_end
 S_LEN = 8  # take how many frames in the past
 A_DIM = 6
 ACTOR_LR_RATE = 0.0001
 BUFFER_NORM_FACTOR = 10.0
-# TOTAL_NUMBER_OF_CHUNKS = 48.0
-TOTAL_NUMBER_OF_CHUNKS = 199 #TODO : Add actual number
+# CHUNK_TIL_VIDEO_END_CAP = 48.0
 M_IN_K = 1000.0
 DEFAULT_QUALITY = 1  # default video quality without agent
 
@@ -81,6 +79,7 @@ class ComycoLin(sabre.Abr):
         delay = self.get_delay(segment_index)
         next_video_chunk_sizes = self.get_next_video_chunk_sizes(segment_index)
         video_chunk_remain = self.get_video_chunk_remain(segment_index)
+        CHUNK_TIL_VIDEO_END_CAP = len(self.segments)
 
         # retrieve previous state
         if len(self.s_batch) == 0:
@@ -98,7 +97,7 @@ class ComycoLin(sabre.Abr):
         state[2, -1] = float(video_chunk_size) / float(delay) / M_IN_K  # kilo byte / ms
         state[3, -1] = float(delay) / M_IN_K / BUFFER_NORM_FACTOR  # 10 sec
         state[4, :A_DIM] = np.array(next_video_chunk_sizes) / M_IN_K / M_IN_K  # mega byte
-        state[5, -1] = np.minimum(video_chunk_remain, TOTAL_NUMBER_OF_CHUNKS) / float(TOTAL_NUMBER_OF_CHUNKS)
+        state[5, -1] = np.minimum(video_chunk_remain, CHUNK_TIL_VIDEO_END_CAP) / float(CHUNK_TIL_VIDEO_END_CAP)
 
         action_prob = self.actor.predict(np.reshape(state, (1, S_INFO, S_LEN)))
         self.bit_rate = np.argmax(action_prob)
@@ -117,4 +116,6 @@ class ComycoLin(sabre.Abr):
         # while (quality + 1 < len(bitrates) and
         #     bitrates[quality + 1] <= throughput):
         #     quality += 1
+
+        # print("self.bit_rate", quality)
         # return (quality, 0)
