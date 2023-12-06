@@ -15,6 +15,16 @@
             "cwd": "${workspaceFolder}/example/figures"
         },
         {
+            "name": "Sabre / Debug tomm19 figures",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}/example/figures/generate.py",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/example/figures"
+        },
+        {
             "name": "Debug Sabre/ComycoLin",
             "type": "python",
             "request": "launch",
