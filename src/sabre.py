@@ -1347,6 +1347,8 @@ if __name__ == '__main__':
     buffer_size = args.max_buffer * 1000
     gamma_p = args.gamma_p
 
+    network = NetworkModel(network_trace)
+
     config = {'buffer_size': buffer_size,
               'gp': gamma_p,
               'abr_osc': args.abr_osc,
@@ -1354,14 +1356,12 @@ if __name__ == '__main__':
               'no_ibr': args.no_insufficient_buffer_rule}
     if args.abr[-3:] == '.py':
         abr = AbrInput(args.abr, config)
+        # pass network to ABR 
+        abr.abr.set_network(network)
     else:
         abr_list[args.abr].use_abr_o = args.abr_osc
         abr_list[args.abr].use_abr_u = not args.abr_osc
         abr = abr_list[args.abr](config)
-    network = NetworkModel(network_trace)
-
-    # pass network to ABR 
-    abr.abr.set_network(network)
     
     if args.replace[-3:] == '.py':
         replacer = ReplacementInput(args.replace)
