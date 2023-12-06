@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../pensieve"
+		},
+		{
+			"path": "../comyco-lin"
+		}
+	],
+	"settings": {}
+}

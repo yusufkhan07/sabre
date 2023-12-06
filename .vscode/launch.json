@@ -5,7 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug ComycoLin",
+            "name": "Sabre / Debug figures",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}/example/figures/generate.py",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/example/figures"
+        },
+        {
+            "name": "Debug Sabre/ComycoLin",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/sabre/src/sabre.py",
@@ -13,18 +23,22 @@
             "justMyCode": true,
             "args": [
                 "--abr",
-                "${workspaceFolder}/sabre/example/ComycoLin/ComycoLin.py"
+                "${workspaceFolder}/example/ComycoLin/ComycoLin.py"
             ],
-            "cwd": "${workspaceFolder}/sabre/example"
+            "cwd": "${workspaceFolder}/example"
         },
         {
-            "name": "tomm19 - Python: Current File",
+            "name": "Debug Sabre/Pensieve",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}/sabre/src/sabre.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "cwd": "${workspaceFolder}/example/tomm19"
-        }
+            "args": [
+                "--abr",
+                "${workspaceFolder}/example/Pensieve/Pensieve.py"
+            ],
+            "cwd": "${workspaceFolder}/example"
+        },
     ]
 }
