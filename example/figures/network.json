@@ -1,0 +1,6 @@
+[
+  { "duration_ms": 150000, "bandwidth_kbps": 2000, "latency_ms": 75 },
+  { "duration_ms": 150000, "bandwidth_kbps": 4500, "latency_ms": 150 },
+  { "duration_ms": 150000, "bandwidth_kbps": 1000, "latency_ms": 200 },
+  { "duration_ms": 150000, "bandwidth_kbps": 7000, "latency_ms": 150 }
+]

@@ -20,9 +20,9 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "program": "${workspaceFolder}/example/figures/generate.py",
+            "program": "${workspaceFolder}/example/tomm19/generate.py",
             "justMyCode": true,
-            "cwd": "${workspaceFolder}/example/figures"
+            "cwd": "${workspaceFolder}/example/tomm19"
         },
         {
             "name": "Debug Sabre/ComycoLin",
